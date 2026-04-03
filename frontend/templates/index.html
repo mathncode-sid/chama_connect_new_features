@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empty States & Feedback UI - ChamaConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Empty States & Loading States Demo</h1>
+            <p>Better feedback when there's no data to display</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs-navigation">
+            <button class="tab-link active" data-tab="empty-states">Empty States</button>
+            <button class="tab-link" data-tab="loading-states">Loading States</button>
+            <button class="tab-link" data-tab="skeleton-loaders">Skeleton Loaders</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-area">
+            <!-- Empty States Tab -->
+            <div class="tab-content active" id="empty-states">
+                <div class="states-grid">
+                    <!-- No Chamas -->
+                    <div class="state-card">
+                        <h3>No Chamas</h3>
+                        <div class="empty-state-preview">
+                            <div class="empty-state">
+                                <div class="empty-icon">🌍</div>
+                                <h2>No Chamas Yet</h2>
+                                <p>You haven't created any chama groups yet. Create your first one to start saving with your community!</p>
+                                <div class="empty-actions">
+                                    <button class="btn-primary">Create Your First Chama</button>
+                                    <button class="btn-secondary">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No Contributions -->
+                    <div class="state-card">
+                        <h3>No Contributions</h3>
+                        <div class="empty-state-preview">
+                            <div class="empty-state">
+                                <div class="empty-icon">💰</div>
+                                <h2>No Contributions Yet</h2>
+                                <p>Your chama hasn't received any contributions. Members can contribute via USSD or the mobile app.</p>
+                                <small class="empty-hint">💡 Members: Send contributions using your phone shortcode</small>
+                                <div class="empty-actions">
+                                    <button class="btn-primary">Share USSD Code</button>
+                                    <button class="btn-secondary">Invite Members</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No Members -->
+                    <div class="state-card">
+                        <h3>No Members</h3>
+                        <div class="empty-state-preview">
+                            <div class="empty-state">
+                                <div class="empty-icon">👥</div>
+                                <h2>No Members Yet</h2>
+                                <p>Your chama is waiting for members. Invite your friends and family to join your savings group.</p>
+                                <small class="empty-hint">💡 You are the only member right now</small>
+                                <div class="empty-actions">
+                                    <button class="btn-primary">Invite Members</button>
+                                    <button class="btn-secondary">Send SMS Invite</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No Loans -->
+                    <div class="state-card">
+                        <h3>No Loans</h3>
+                        <div class="empty-state-preview">
+                            <div class="empty-state">
+                                <div class="empty-icon">📋</div>
+                                <h2>No Loan Requests</h2>
+                                <p>No active loan requests. Members can request loans once the chama is active.</p>
+                                <div class="empty-actions">
+                                    <button class="btn-primary">View Loan Policies</button>
+                                    <button class="btn-secondary">Create Loan Product</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No Payouts -->
+                    <div class="state-card">
+                        <h3>No Payouts</h3>
+                        <div class="empty-state-preview">
+                            <div class="empty-state">
+                                <div class="empty-icon">📅</div>
+                                <h2>No Payouts Yet</h2>
+                                <p>Payouts will begin according to your chama's rotation schedule. First payout coming soon!</p>
+                                <small class="empty-hint">💡 Next payout in 15 days</small>
+                                <div class="empty-actions">
+                                    <button class="btn-primary">View Schedule</button>
+                                    <button class="btn-secondary">Edit Preferences</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No Transactions -->
+                    <div class="state-card">
+                        <h3>No Transactions</h3>
+                        <div class="empty-state-preview">
+                            <div class="empty-state">
+                                <div class="empty-icon">📊</div>
+                                <h2>No Transaction History</h2>
+                                <p>All your chama transactions will appear here. Start with your first contribution!</p>
+                                <div class="empty-actions">
+                                    <button class="btn-primary">Make Contribution</button>
+                                    <button class="btn-secondary">Download Report</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading States Tab -->
+            <div class="tab-content" id="loading-states">
+                <div class="loading-states-grid">
+                    <!-- Pulse Loading -->
+                    <div class="state-card">
+                        <h3>Loading with Pulse</h3>
+                        <div class="loading-demo">
+                            <div class="loading-state pulse">
+                                <div class="loading-spinner">
+                                    <div class="spinner-ring"></div>
+                                </div>
+                                <p>Loading your chamas...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dots Loading -->
+                    <div class="state-card">
+                        <h3>Loading with Dots</h3>
+                        <div class="loading-demo">
+                            <div class="loading-state dots">
+                                <p>Fetching contributions<span class="dot-animation">...</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Loading -->
+                    <div class="state-card">
+                        <h3>Loading with Progress</h3>
+                        <div class="loading-demo">
+                            <div class="loading-state">
+                                <p>Loading members...</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skeleton Card -->
+                    <div class="state-card">
+                        <h3>Card Skeleton</h3>
+                        <div class="loading-demo">
+                            <div class="skeleton-card">
+                                <div class="skeleton-header"></div>
+                                <div class="skeleton-content">
+                                    <div class="skeleton-line" style="width: 80%;"></div>
+                                    <div class="skeleton-line" style="width: 60%;"></div>
+                                    <div class="skeleton-line" style="width: 70%;"></div>
+                                </div>
+                                <div class="skeleton-footer">
+                                    <div class="skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skeleton Table -->
+                    <div class="state-card">
+                        <h3>Table Skeleton</h3>
+                        <div class="loading-demo">
+                            <div class="skeleton-table">
+                                <div class="skeleton-row">
+                                    <div class="skeleton-cell" style="width: 20%;"></div>
+                                    <div class="skeleton-cell" style="width: 30%;"></div>
+                                    <div class="skeleton-cell" style="width: 25%;"></div>
+                                    <div class="skeleton-cell" style="width: 25%;"></div>
+                                </div>
+                                <div class="skeleton-row">
+                                    <div class="skeleton-cell" style="width: 20%;"></div>
+                                    <div class="skeleton-cell" style="width: 30%;"></div>
+                                    <div class="skeleton-cell" style="width: 25%;"></div>
+                                    <div class="skeleton-cell" style="width: 25%;"></div>
+                                </div>
+                                <div class="skeleton-row">
+                                    <div class="skeleton-cell" style="width: 20%;"></div>
+                                    <div class="skeleton-cell" style="width: 30%;"></div>
+                                    <div class="skeleton-cell" style="width: 25%;"></div>
+                                    <div class="skeleton-cell" style="width: 25%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skeleton List -->
+                    <div class="state-card">
+                        <h3>List Skeleton</h3>
+                        <div class="loading-demo">
+                            <div class="skeleton-list">
+                                <div class="skeleton-item"></div>
+                                <div class="skeleton-item"></div>
+                                <div class="skeleton-item"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skeleton Loaders Tab -->
+            <div class="tab-content" id="skeleton-loaders">
+                <div class="skeleton-showcase">
+                    <div class="showcase-section">
+                        <h3>When to Use Skeleton Loaders</h3>
+                        <div class="tips-grid">
+                            <div class="tip-box">
+                                <h4>✓ Good Use Case</h4>
+                                <p>When you know content is loading immediately (connection is good)</p>
+                                <p class="example">Example: Dashboard cards loading</p>
+                            </div>
+                            <div class="tip-box">
+                                <h4>✗ Wrong Use Case</h4>
+                                <p>When there's no data and you're not certain when data will appear</p>
+                                <p class="example">Example: Empty search results (use empty states instead)</p>
+                            </div>
+                            <div class="tip-box">
+                                <h4>⚡ Best Practice</h4>
+                                <p>Show skeleton for known data, empty state for missing data</p>
+                                <p class="example">Example: Show skeleton for profile pic, empty state if none uploaded</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-section">
+                        <h3>Real-World Dashboard Example</h3>
+                        <div class="dashboard-preview">
+                            <div class="dashboard-header">
+                                <h2>My Dashboard</h2>
+                            </div>
+                            
+                            <div class="dashboard-stats">
+                                <div class="stat-skeleton">
+                                    <div class="skeleton-header"></div>
+                                    <div class="skeleton-number"></div>
+                                </div>
+                                <div class="stat-skeleton">
+                                    <div class="skeleton-header"></div>
+                                    <div class="skeleton-number"></div>
+                                </div>
+                                <div class="stat-skeleton">
+                                    <div class="skeleton-header"></div>
+                                    <div class="skeleton-number"></div>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-content">
+                                <h3>Recent Transactions</h3>
+                                <div class="skeleton-table">
+                                    <div class="skeleton-row">
+                                        <div class="skeleton-cell"></div>
+                                        <div class="skeleton-cell"></div>
+                                        <div class="skeleton-cell"></div>
+                                    </div>
+                                    <div class="skeleton-row">
+                                        <div class="skeleton-cell"></div>
+                                        <div class="skeleton-cell"></div>
+                                        <div class="skeleton-cell"></div>
+                                    </div>
+                                    <div class="skeleton-row">
+                                        <div class="skeleton-cell"></div>
+                                        <div class="skeleton-cell"></div>
+                                        <div class="skeleton-cell"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <aside class="info-panel">
+            <h3>💡 Design Principles</h3>
+            <div class="principle-list">
+                <div class="principle">
+                    <h4>State Clarity</h4>
+                    <p>Users should always know if the app is loading, empty, or has an error.</p>
+                </div>
+                <div class="principle">
+                    <h4>Action-Oriented</h4>
+                    <p>Every empty state should suggest next steps (CTA buttons).</p>
+                </div>
+                <div class="principle">
+                    <h4>Reduce Cognitive Load</h4>
+                    <p>Simple messaging, clear hierarchy, helpful hints.</p>
+                </div>
+                <div class="principle">
+                    <h4>Distinguish States</h4>
+                    <p>Empty ≠ Loading ≠ Error. Use different visual treatment.</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
