@@ -7,85 +7,93 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <div class="header">
-            <div class="header-content">
-                <h1>🌐 USSD Simulator</h1>
-                <p>Simulate USSD experience for Chama Group Management</p>
-            </div>
-        </div>
 
-        <div class="main-content">
-            <!-- Stats Panel -->
-            <div class="stats-panel">
-                <div class="stat-box">
-                    <h3>Group Balance</h3>
-                    <p class="stat-value" id="groupBalance">Ksh 0</p>
-                </div>
-                <div class="stat-box">
-                    <h3>Total Members</h3>
-                    <p class="stat-value" id="memberCount">0</p>
-                </div>
-                <div class="stat-box">
-                    <h3>Status</h3>
-                    <p class="stat-value" id="status" style="color: #10b981;">Active</p>
-                </div>
-            </div>
-
-            <!-- USSD Simulator -->
-            <div class="ussd-container">
-                <div class="ussd-screen">
-                    <div class="phone-header">
-                        <span>9:41</span>
-                        <span>ChamaConnect</span>
-                        <span>🔋</span>
-                    </div>
-                    
-                    <div class="screen-display" id="screenDisplay">
-                        <div class="welcome-message">
-                            <p>Ready to start USSD session...</p>
-                            <button class="btn-primary" id="startBtn" onclick="startUSSD()">Start USSD Session</button>
+    <div class="app-wrapper">
+        <!-- Main Content Area -->
+        <div class="content-grid">
+            <!-- USSD Phone Simulator -->
+            <div class="phone-simulator-section">
+                <div class="ussd-phone">
+                    <div class="phone-screen">
+                        <div class="phone-status">
+                            <span class="time">9:41</span>
+                            <span class="carrier">ChamaConnect</span>
+                            <span class="battery">🔋</span>
                         </div>
-                    </div>
-
-                    <div class="phone-keypad">
-                        <input 
-                            type="text" 
-                            id="userInput" 
-                            class="input-field" 
-                            placeholder="Enter choice or text..."
-                            onkeypress="handleKeyPress(event)"
-                        >
-                        <div class="button-group">
-                            <button class="btn-send" onclick="sendChoiceToUSSD()" id="sendBtn" disabled>Send (CON)</button>
-                            <button class="btn-end" onclick="endUSSD()" id="endBtn" disabled>End Session</button>
-                            <button class="btn-reset" onclick="resetSession()">Reset</button>
+                        
+                        <div class="screen-display" id="screenDisplay">
+                            <div class="welcome-screen">
+                                <div class="welcome-icon">📱</div>
+                                <p class="welcome-title">Ready to Start</p>
+                                <p class="welcome-text">Start a USSD session to manage your chama group</p>
+                                <button class="btn-primary" id="startBtn" onclick="startUSSD()" aria-label="Start USSD session">Begin Session</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="phone-footer">
-                        <div class="footer-info">
+                        <div class="phone-input">
+                            <input 
+                                type="text" 
+                                id="userInput" 
+                                class="input-field" 
+                                placeholder="Enter choice..."
+                                onkeypress="handleKeyPress(event)"
+                                aria-label="USSD input field"
+                            >
+                            <div class="button-group">
+                                <button class="btn-send" onclick="sendChoiceToUSSD()" id="sendBtn" disabled aria-label="Send choice">→ Send</button>
+                                <button class="btn-end" onclick="endUSSD()" id="endBtn" disabled aria-label="End session">End</button>
+                                <button class="btn-reset" onclick="resetSession()" aria-label="Reset session">↻ Reset</button>
+                            </div>
+                        </div>
+
+                        <div class="phone-footer">
                             <span id="phoneNumber">📱 254700000000</span>
-                            <span id="sessionId" style="font-size: 0.8em; color: #666;"></span>
+                            <span id="sessionId" class="session-info"></span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- History Panel -->
-            <div class="history-panel">
-                <h3>📝 Session History</h3>
-                <div class="history-content" id="historyContent">
-                    <p class="empty-state">No session history yet</p>
-                </div>
+                <!-- Error Alert -->
+                <div id="errorAlert" class="alert alert-error" style="display: none;"></div>
             </div>
         </div>
 
         <!-- Footer -->
-        <div class="footer">
+        <footer class="footer">
             <p>🔐 All data is simulated for demonstration purposes only</p>
-            <p style="font-size: 0.9em; color: var(--text-secondary);">USSD Simulator v1.0 | ChamaConnect Demo</p>
+        </footer>
+    </div>
+
+    <!-- Modal for Receipts -->
+    <div id="receiptModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+            <h3>✅ Transaction Successful</h3>
+            <div class="receipt">
+                <p><strong>Receipt No:</strong> <span id="receiptNo"></span></p>
+                <p><strong>Amount:</strong> <span id="receiptAmount"></span></p>
+                <p><strong>Status:</strong> <span style="color: #10b981;">Confirmed</span></p>
+                <p><strong>Time:</strong> <span id="receiptTime"></span></p>
+            </div>
+            <button class="btn-primary" onclick="closeModal()">Dismiss</button>
+        </div>
+    </div>
+
+    <!-- Demo Instructions Modal -->
+    <div id="demoModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDemoModal()" aria-label="Close modal">&times;</button>
+            <h3>🎬 Auto Demo Walkthrough</h3>
+            <p>This will automatically walk through a complete USSD session:</p>
+            <ul>
+                <li>✓ Start a session</li>
+                <li>✓ View group balance</li>
+                <li>✓ Make a contribution</li>
+                <li>✓ Check recent activity</li>
+                <li>✓ End session</li>
+            </ul>
+            <button class="btn-primary" onclick="startDemoWalkthrough()">Start Demo</button>
+            <button class="btn-secondary" onclick="closeDemoModal()">Cancel</button>
         </div>
     </div>
 
